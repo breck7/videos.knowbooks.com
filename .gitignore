@@ -1,1 +1,7 @@
 .*
+*.csv
+*.json
+*.html
+*.js
+*.tsv
+

@@ -1,0 +1,93 @@
+// KnowBooks Videos player.
+//
+// Bandwidth design:
+//  - Each card shows a small poster JPG that the browser loads lazily
+//    (native <img loading="lazy">).
+//  - No <video> downloads anything on page load. A single shared <video>
+//    lives in a <dialog> and only gets a src when you press play
+//    (preload="none" + src set on demand), so you only ever fetch the
+//    video you actually watch.
+//  - Closing the dialog drops the src, which aborts any in-flight fetch.
+
+(function () {
+  "use strict"
+
+  const gallery = document.getElementById("kb-gallery")
+  if (!gallery) return
+
+  const dialog = document.getElementById("kb-dialog")
+  const player = document.getElementById("kb-player")
+  const dialogTitle = document.getElementById("kb-dialog-title")
+  const download = document.getElementById("kb-download")
+  const sortButton = document.getElementById("kb-sort")
+  const countLabel = document.getElementById("kb-count")
+
+  const cards = Array.from(gallery.querySelectorAll(".kb-card"))
+  if (countLabel) countLabel.textContent = cards.length + (cards.length === 1 ? " video" : " videos")
+
+  // Newest first is the nicer default, but chronological is one click away.
+  let ascending = true
+
+  function sortCards() {
+    const sorted = cards.slice().sort((a, b) => {
+      const cmp = String(a.dataset.date).localeCompare(String(b.dataset.date))
+      return ascending ? cmp : -cmp
+    })
+    const fragment = document.createDocumentFragment()
+    sorted.forEach((card) => fragment.appendChild(card))
+    gallery.appendChild(fragment)
+  }
+
+  function openPlayer(card) {
+    player.poster = card.dataset.poster || ""
+    player.src = card.dataset.src
+    dialogTitle.textContent = card.dataset.title || ""
+    download.href = card.dataset.src
+    download.setAttribute("download", card.dataset.src)
+    if (typeof dialog.showModal === "function") {
+      dialog.showModal()
+    } else {
+      dialog.setAttribute("open", "")
+    }
+    const attempt = player.play()
+    if (attempt && typeof attempt.catch === "function") attempt.catch(() => {})
+  }
+
+  function stopPlayback() {
+    player.pause()
+    player.removeAttribute("src")
+    player.load()
+  }
+
+  function closePlayer() {
+    stopPlayback()
+    if (dialog.open) dialog.close()
+  }
+
+  gallery.addEventListener("click", (event) => {
+    const card = event.target.closest(".kb-card")
+    if (card) openPlayer(card)
+  })
+
+  const closeButton = document.getElementById("kb-close")
+  if (closeButton) closeButton.addEventListener("click", closePlayer)
+
+  // Clicking the dark area around the dialog closes it.
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) closePlayer()
+  })
+
+  // Fires for Esc too, so make sure the network fetch is dropped either way.
+  dialog.addEventListener("close", stopPlayback)
+
+  if (sortButton) {
+    sortButton.addEventListener("click", () => {
+      ascending = !ascending
+      sortButton.textContent = ascending ? "Oldest first" : "Newest first"
+      sortButton.setAttribute("aria-label", "Sort by date: " + sortButton.textContent)
+      sortCards()
+    })
+  }
+
+  sortCards()
+})()
