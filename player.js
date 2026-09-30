@@ -35,28 +35,47 @@
   }
 
   function sortCards() {
-    const sorted = cards.slice().sort((a, b) => {
+    order = cards.slice().sort((a, b) => {
       const cmp = String(a.dataset.date).localeCompare(String(b.dataset.date))
       return ascending ? cmp : -cmp
     })
     const fragment = document.createDocumentFragment()
-    sorted.forEach((card) => fragment.appendChild(card))
+    order.forEach((card) => fragment.appendChild(card))
     gallery.appendChild(fragment)
   }
 
-  function openPlayer(card) {
+  // Current display order + which card is showing, so arrows can cycle.
+  let order = cards.slice()
+  let currentIndex = 0
+
+  function loadCard(card) {
+    if (!card) return
+    currentIndex = order.indexOf(card)
     player.poster = card.dataset.poster || ""
     player.src = card.dataset.src
     dialogTitle.textContent = card.dataset.title || ""
     download.href = card.dataset.src
     download.setAttribute("download", card.dataset.src)
-    if (typeof dialog.showModal === "function") {
-      dialog.showModal()
-    } else {
-      dialog.setAttribute("open", "")
-    }
     const attempt = player.play()
     if (attempt && typeof attempt.catch === "function") attempt.catch(() => {})
+  }
+
+  // Move by delta (+1 next, -1 previous), wrapping around the ends.
+  function step(delta) {
+    if (!order.length) return
+    currentIndex = (currentIndex + delta + order.length) % order.length
+    loadCard(order[currentIndex])
+  }
+
+  function openPlayer(card) {
+    loadCard(card)
+    if (!dialog.open) {
+      if (typeof dialog.showModal === "function") {
+        dialog.showModal()
+      } else {
+        dialog.setAttribute("open", "")
+      }
+    }
   }
 
   function stopPlayback() {
@@ -77,6 +96,23 @@
 
   const closeButton = document.getElementById("kb-close")
   if (closeButton) closeButton.addEventListener("click", closePlayer)
+
+  const prevButton = document.getElementById("kb-prev")
+  const nextButton = document.getElementById("kb-next")
+  if (prevButton) prevButton.addEventListener("click", () => step(-1))
+  if (nextButton) nextButton.addEventListener("click", () => step(1))
+
+  // Left/right arrow keys cycle through videos while the player is open.
+  document.addEventListener("keydown", (event) => {
+    if (!dialog.open) return
+    if (event.key === "ArrowRight") {
+      event.preventDefault()
+      step(1)
+    } else if (event.key === "ArrowLeft") {
+      event.preventDefault()
+      step(-1)
+    }
+  })
 
   // Clicking the dark area around the dialog closes it.
   dialog.addEventListener("click", (event) => {
