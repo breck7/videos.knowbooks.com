@@ -1,4 +1,4 @@
-// KnowBooks Videos player.
+// Knowbooks Videos player.
 //
 // Bandwidth design:
 //  - Each card shows a small poster JPG that the browser loads lazily
