@@ -1,6 +1,6 @@
 // Knowbooks Videos
 //
-// A player for every video in this repo, sorted chronologically.
+// A player for every video in this repo, newest first by default.
 // Nothing heavy loads up front: cards are just lazy-loaded posters,
 // and a video only downloads when someone presses play.
 //
@@ -146,7 +146,7 @@ css
 
 <div class="kb-toolbar">
  <span class="kb-count" id="kb-count"></span>
- <button class="kb-sort" id="kb-sort" type="button" aria-label="Sort by date: Oldest first">Oldest first</button>
+ <button class="kb-sort" id="kb-sort" type="button" aria-label="Sort by date: Newest first">Newest first</button>
 </div>
 
 <div class="kb-gallery" id="kb-gallery">
@@ -302,6 +302,17 @@ css
   <span class="kb-info">
    <span class="kb-title">KB1984</span>
    <span class="kb-date">Sep 25, 2026</span>
+  </span>
+ </button>
+ <button class="kb-card" type="button" data-src="Logo.mp4" data-poster="posters/Logo.jpg" data-date="2026-09-29" data-title="Logo" data-duration="0:24">
+  <span class="kb-media">
+   <img class="kb-thumb" src="posters/Logo.jpg" alt="Logo" loading="lazy" decoding="async" width="640" height="360">
+   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+   <span class="kb-duration">0:24</span>
+  </span>
+  <span class="kb-info">
+   <span class="kb-title">Logo</span>
+   <span class="kb-date">Sep 29, 2026</span>
   </span>
  </button>
 </div>

@@ -25,8 +25,14 @@
   const cards = Array.from(gallery.querySelectorAll(".kb-card"))
   if (countLabel) countLabel.textContent = cards.length + (cards.length === 1 ? " video" : " videos")
 
-  // Newest first is the nicer default, but chronological is one click away.
-  let ascending = true
+  // Newest first by default; chronological is one click away.
+  let ascending = false
+
+  function renderSortLabel() {
+    if (!sortButton) return
+    sortButton.textContent = ascending ? "Oldest first" : "Newest first"
+    sortButton.setAttribute("aria-label", "Sort by date: " + sortButton.textContent)
+  }
 
   function sortCards() {
     const sorted = cards.slice().sort((a, b) => {
@@ -83,11 +89,11 @@
   if (sortButton) {
     sortButton.addEventListener("click", () => {
       ascending = !ascending
-      sortButton.textContent = ascending ? "Oldest first" : "Newest first"
-      sortButton.setAttribute("aria-label", "Sort by date: " + sortButton.textContent)
+      renderSortLabel()
       sortCards()
     })
   }
 
+  renderSortLabel()
   sortCards()
 })()
