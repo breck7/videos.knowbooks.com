@@ -4,10 +4,9 @@
 // Nothing heavy loads up front: cards are just lazy-loaded posters,
 // and a video only downloads when someone presses play.
 //
-// To add a video: drop the .mp4 here, make a poster with
-//   ffmpeg -ss 1 -i myVideo.mp4 -frames:v 1 -vf scale=640:-2 -q:v 4 posters/myVideo.jpg
-// then copy a <button class="kb-card"> block below and set
-// data-src, data-poster, data-date (YYYY-MM-DD), data-title and data-duration.
+// The videos live in videos.scroll as a ScrollSet (data, not markup).
+// This page reads the compiled videos.json and generates a card per row,
+// so adding a video is a data edit in videos.scroll, not an HTML edit here.
 
 buildHtml
 permalink index.html
@@ -156,171 +155,9 @@ css
 </div>
 
 <div class="kb-gallery" id="kb-gallery">
- <button class="kb-card" type="button" data-src="liberateIdeas.mp4" data-poster="posters/liberateIdeas.jpg" data-date="2022-09-06" data-title="Liberate Ideas" data-duration="0:47">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/liberateIdeas.jpg" alt="Liberate Ideas" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:47</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Liberate Ideas</span>
-   <span class="kb-date">Sep 6, 2022</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="knowBooksNeedLaserCutter.mp4" data-poster="posters/knowBooksNeedLaserCutter.jpg" data-date="2026-08-27" data-title="Knowbooks Needs a Laser Cutter" data-duration="0:14">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/knowBooksNeedLaserCutter.jpg" alt="Knowbooks Needs a Laser Cutter" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:14</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Knowbooks Needs a Laser Cutter</span>
-   <span class="kb-date">Aug 27, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="rootCanal.mp4" data-poster="posters/rootCanal.jpg" data-date="2026-08-31" data-title="Root Canal" data-duration="0:08">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/rootCanal.jpg" alt="Root Canal" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:08</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Root Canal</span>
-   <span class="kb-date">Aug 31, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="shredding.mp4" data-poster="posters/shredding.jpg" data-date="2026-09-04" data-title="Shredding" data-duration="0:23">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/shredding.jpg" alt="Shredding" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:23</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Shredding</span>
-   <span class="kb-date">Sep 4, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="knowBooksPrepared.mp4" data-poster="posters/knowBooksPrepared.jpg" data-date="2026-09-06" data-title="Knowbooks Prepared" data-duration="0:26">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/knowBooksPrepared.jpg" alt="Knowbooks Prepared" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:26</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Knowbooks Prepared</span>
-   <span class="kb-date">Sep 6, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="MadeInHawaii.mp4" data-poster="posters/MadeInHawaii.jpg" data-date="2026-09-12" data-title="Made in Hawaii" data-duration="0:08">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/MadeInHawaii.jpg" alt="Made in Hawaii" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:08</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Made in Hawaii</span>
-   <span class="kb-date">Sep 12, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="madeInHawaiiZoomed.mp4" data-poster="posters/madeInHawaiiZoomed.jpg" data-date="2026-09-14T08:45" data-title="Made in Hawaii (Zoom)" data-duration="0:09">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/madeInHawaiiZoomed.jpg" alt="Made in Hawaii (Zoom)" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:09</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Made in Hawaii (Zoom)</span>
-   <span class="kb-date">Sep 14, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="hatersWillSayHI.mp4" data-poster="posters/hatersWillSayHI.jpg" data-date="2026-09-14T12:42" data-title="Haters Will Say HI" data-duration="0:04">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/hatersWillSayHI.jpg" alt="Haters Will Say HI" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:04</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Haters Will Say HI</span>
-   <span class="kb-date">Sep 14, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="hatersWide.mp4" data-poster="posters/hatersWide.jpg" data-date="2026-09-14T12:44" data-title="Haters (Wide)" data-duration="0:04">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/hatersWide.jpg" alt="Haters (Wide)" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:04</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Haters (Wide)</span>
-   <span class="kb-date">Sep 14, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="kbSneakPeak.mp4" data-poster="posters/kbSneakPeak.jpg" data-date="2026-09-16" data-title="Knowbooks Sneak Peek" data-duration="0:01">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/kbSneakPeak.jpg" alt="Knowbooks Sneak Peek" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:01</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Knowbooks Sneak Peek</span>
-   <span class="kb-date">Sep 16, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="451.mp4" data-poster="posters/451.jpg" data-date="2026-09-20" data-title="451" data-duration="0:32">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/451.jpg" alt="451" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:32</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">451</span>
-   <span class="kb-date">Sep 20, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="lemon.mp4" data-poster="posters/lemon.jpg" data-date="2026-09-21" data-title="Lemon" data-duration="0:42">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/lemon.jpg" alt="Lemon" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:42</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Lemon</span>
-   <span class="kb-date">Sep 21, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="Magnets.mp4" data-poster="posters/Magnets.jpg" data-date="2026-09-23" data-title="Magnets" data-duration="0:37">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/Magnets.jpg" alt="Magnets" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:37</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Magnets</span>
-   <span class="kb-date">Sep 23, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="kb1984.mp4" data-poster="posters/kb1984.jpg" data-date="2026-09-25" data-title="KB1984" data-duration="0:28">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/kb1984.jpg" alt="KB1984" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:28</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">KB1984</span>
-   <span class="kb-date">Sep 25, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="Logo.mp4" data-poster="posters/Logo.jpg" data-date="2026-09-29" data-title="Logo" data-duration="0:24">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/Logo.jpg" alt="Logo" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:24</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Logo</span>
-   <span class="kb-date">Sep 29, 2026</span>
-  </span>
- </button>
+datatable videos.json
+ compose kbCard <button class="kb-card" type="button" data-src="{src}" data-poster="{poster}" data-date="{published}" data-title="{title}" data-duration="{duration}"><span class="kb-media"><img class="kb-thumb" src="{poster}" alt="{title}" loading="lazy" decoding="async" width="640" height="360"><span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="kb-duration">{duration}</span></span><span class="kb-info"><span class="kb-title">{title}</span><span class="kb-date">{publishedLabel}</span></span></button>
+  printColumn kbCard
 </div>
 
 <dialog class="kb-dialog" id="kb-dialog">
