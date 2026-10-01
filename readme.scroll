@@ -156,6 +156,17 @@ css
 </div>
 
 <div class="kb-gallery" id="kb-gallery">
+ <button class="kb-card" type="button" data-src="liberateIdeas.mp4" data-poster="posters/liberateIdeas.jpg" data-date="2022-09-06" data-title="Liberate Ideas" data-duration="0:47">
+  <span class="kb-media">
+   <img class="kb-thumb" src="posters/liberateIdeas.jpg" alt="Liberate Ideas" loading="lazy" decoding="async" width="640" height="360">
+   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+   <span class="kb-duration">0:47</span>
+  </span>
+  <span class="kb-info">
+   <span class="kb-title">Liberate Ideas</span>
+   <span class="kb-date">Sep 6, 2022</span>
+  </span>
+ </button>
  <button class="kb-card" type="button" data-src="knowBooksNeedLaserCutter.mp4" data-poster="posters/knowBooksNeedLaserCutter.jpg" data-date="2026-08-27" data-title="Knowbooks Needs a Laser Cutter" data-duration="0:14">
   <span class="kb-media">
    <img class="kb-thumb" src="posters/knowBooksNeedLaserCutter.jpg" alt="Knowbooks Needs a Laser Cutter" loading="lazy" decoding="async" width="640" height="360">
@@ -198,17 +209,6 @@ css
   <span class="kb-info">
    <span class="kb-title">Knowbooks Prepared</span>
    <span class="kb-date">Sep 6, 2026</span>
-  </span>
- </button>
- <button class="kb-card" type="button" data-src="liberateIdeas.mp4" data-poster="posters/liberateIdeas.jpg" data-date="2026-09-09" data-title="Liberate Ideas" data-duration="0:47">
-  <span class="kb-media">
-   <img class="kb-thumb" src="posters/liberateIdeas.jpg" alt="Liberate Ideas" loading="lazy" decoding="async" width="640" height="360">
-   <span class="kb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-   <span class="kb-duration">0:47</span>
-  </span>
-  <span class="kb-info">
-   <span class="kb-title">Liberate Ideas</span>
-   <span class="kb-date">Sep 9, 2026</span>
   </span>
  </button>
  <button class="kb-card" type="button" data-src="MadeInHawaii.mp4" data-poster="posters/MadeInHawaii.jpg" data-date="2026-09-12" data-title="Made in Hawaii" data-duration="0:08">
