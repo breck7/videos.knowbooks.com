@@ -133,5 +133,14 @@
     "published": "2026-09-29",
     "publishedLabel": "Sep 29, 2026",
     "duration": "0:24"
+  },
+  {
+    "id": "knowbooksAreComing",
+    "title": "Knowbooks Are Coming",
+    "src": "knowbooksAreComing.mp4",
+    "poster": "posters/knowbooksAreComing.jpg",
+    "published": "2026-10-01",
+    "publishedLabel": "Oct 1, 2026",
+    "duration": "0:28"
   }
 ]
