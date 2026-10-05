@@ -1,0 +1,53 @@
+// buildThumbs.scroll — poster thumbnails, built by `scroll build`.
+//
+// For every *.mp4 in this repo, ensure posters/<name>.jpg exists and is
+// newer than the video. Only new or changed videos are (re)rendered, so a
+// rebuild is instant until you drop in a new mp4.
+//
+// The frame is grabbed POSTER_TIME seconds in (default 1) to skip black
+// lead-ins; very short clips fall back to their first frame.
+//
+// This file only has a build side effect, so it writes no output file.
+// It also warns about any .mp4 that has not been added to videos.scroll yet.
+
+runNodejs
+ const { execSync } = require("child_process")
+ const { existsSync, mkdirSync, readdirSync, readFileSync, statSync, unlinkSync } = require("fs")
+ const { join } = require("path")
+ const posterDir = "posters"
+ const posterTime = process.env.POSTER_TIME || "1"
+ if (!existsSync(posterDir)) mkdirSync(posterDir, { recursive: true })
+ const posterFor = (src) => join(posterDir, src.replace(/\.mp4$/, ".jpg"))
+ const ffmpeg = (src, out, extra) => execSync(`ffmpeg -nostdin -loglevel error -y ${extra} -i "${src}" -frames:v 1 -vf "scale=640:-2" -q:v 4 "${out}"`, { stdio: "inherit" })
+ const isFresh = (src, out) => existsSync(out) && statSync(out).mtimeMs >= statSync(src).mtimeMs
+ const render = (src, out) => {
+  if (existsSync(out)) unlinkSync(out)
+  try {
+   ffmpeg(src, out, `-ss ${posterTime}`)
+   if (!existsSync(out) || statSync(out).size === 0) throw new Error("no frame")
+  } catch (err) {
+   ffmpeg(src, out, "")
+  }
+ }
+ const videos = readdirSync(".").filter((f) => f.endsWith(".mp4"))
+ const sources = new Set(readFileSync("videos.scroll", "utf8").split("\n").filter((l) => l.startsWith("src ")).map((l) => l.slice(4).trim()))
+ let generated = 0
+ let skipped = 0
+ for (const src of videos) {
+  const out = posterFor(src)
+  if (isFresh(src, out)) {
+   skipped++
+   continue
+  }
+  try {
+   render(src, out)
+   console.log(`  built ${out}`)
+   generated++
+  } catch (err) {
+   console.log(`⚠️  Could not render ${out} from ${src}`)
+  }
+ }
+ const missing = videos.filter((src) => !sources.has(src))
+ if (missing.length) console.log(`⚠️  Not in videos.scroll: ${missing.join(", ")}`)
+ console.log(`🖼️  ${generated} poster(s) generated, ${skipped} up to date.`)
+ module.exports = ""
