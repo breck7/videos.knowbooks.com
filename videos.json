@@ -126,6 +126,15 @@
     "duration": "0:28"
   },
   {
+    "id": "closingTime",
+    "title": "Closing Time",
+    "src": "closingTime.mp4",
+    "poster": "posters/closingTime.jpg",
+    "published": "2026-09-29",
+    "publishedLabel": "Sep 29, 2026",
+    "duration": "1:01"
+  },
+  {
     "id": "Logo",
     "title": "Logo",
     "src": "Logo.mp4",
