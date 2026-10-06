@@ -46,7 +46,7 @@ css
    -webkit-font-smoothing: antialiased;
  }
  .kb-hero { max-width: 1200px; margin: 0 auto; padding: 76px 24px 8px; text-align: center; }
- .kb-kicker { margin: 0; text-transform: uppercase; letter-spacing: 0.26em; font-size: 0.72rem; font-weight: 600; color: var(--kb-accent); }
+ .kb-kicker { text-decoration: none; margin: 0; text-transform: uppercase; letter-spacing: 0.26em; font-size: 0.72rem; font-weight: 600; color: var(--kb-accent); }
  .kb-hero h1 {
    margin: 14px 0 0;
    font-size: clamp(2.5rem, 7vw, 4rem);
@@ -146,7 +146,7 @@ css
  }
 
 <header class="kb-hero">
- <p class="kb-kicker">knowbooks.com</p>
+ <a href="https://knowbooks.com" class="kb-kicker">knowbooks.com</a>
  <h1>Videos</h1>
  <p class="kb-sub">For entertainment purposes only.</p>
 </header>
