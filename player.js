@@ -97,10 +97,16 @@
   const closeButton = document.getElementById("kb-close")
   if (closeButton) closeButton.addEventListener("click", closePlayer)
 
+  // Both the header arrows (desktop) and the large on-video arrows (touch)
+  // cycle through videos.
   const prevButton = document.getElementById("kb-prev")
   const nextButton = document.getElementById("kb-next")
+  const prevOverlay = document.getElementById("kb-prev-overlay")
+  const nextOverlay = document.getElementById("kb-next-overlay")
   if (prevButton) prevButton.addEventListener("click", () => step(-1))
   if (nextButton) nextButton.addEventListener("click", () => step(1))
+  if (prevOverlay) prevOverlay.addEventListener("click", () => step(-1))
+  if (nextOverlay) nextOverlay.addEventListener("click", () => step(1))
 
   // Left/right arrow keys cycle through videos while the player is open.
   document.addEventListener("keydown", (event) => {

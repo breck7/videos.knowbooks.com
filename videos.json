@@ -152,5 +152,14 @@
     "published": "2026-10-04",
     "publishedLabel": "Oct 4, 2026",
     "duration": "0:40"
+  },
+  {
+    "id": "KnowbooksRox",
+    "title": "Knowbooks Rocks",
+    "src": "KnowbooksRox.mp4",
+    "poster": "posters/KnowbooksRox.jpg",
+    "published": "2026-10-06",
+    "publishedLabel": "Oct 6, 2026",
+    "duration": "0:44"
   }
 ]

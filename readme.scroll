@@ -128,6 +128,31 @@ css
  .kb-nav { appearance: none; border: 1px solid var(--kb-border); background: transparent; color: var(--kb-text); width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 1rem; line-height: 1; }
  .kb-nav:hover { background: rgba(255, 255, 255, 0.09); }
  .kb-player { width: 100%; max-height: 78vh; display: block; background: #000; }
+ .kb-stage { position: relative; background: #000; }
+ .kb-arrow {
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   width: 52px;
+   height: 52px;
+   display: grid;
+   place-items: center;
+   padding: 0;
+   border: 1px solid rgba(255, 255, 255, 0.3);
+   border-radius: 50%;
+   background: rgba(10, 13, 18, 0.55);
+   color: #ffffff;
+   cursor: pointer;
+   backdrop-filter: blur(6px);
+   -webkit-backdrop-filter: blur(6px);
+   transition: background 0.2s ease, transform 0.2s ease;
+ }
+ .kb-arrow svg { width: 26px; height: 26px; }
+ .kb-arrow:hover { background: rgba(124, 196, 255, 0.9); color: #06121f; }
+ .kb-arrow:active { transform: translateY(-50%) scale(0.92); }
+ .kb-arrow:focus-visible { outline: 2px solid var(--kb-accent); outline-offset: 3px; }
+ .kb-arrow-prev { left: 14px; }
+ .kb-arrow-next { right: 14px; }
  .kb-download { display: inline-block; padding: 12px 18px 16px; color: var(--kb-muted); font-size: 0.85rem; text-decoration: none; }
  .kb-download:hover { color: var(--kb-accent); }
  .kb-dialog-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
@@ -140,6 +165,9 @@ css
    .kb-hero { padding-top: 52px; }
    .kb-toolbar { padding-top: 18px; }
    .kb-gallery { grid-template-columns: 1fr; gap: 18px; }
+   .kb-hint { display: none; }
+ }
+ @media (pointer: coarse) {
    .kb-hint { display: none; }
  }
  @media (prefers-reduced-motion: reduce) {
@@ -173,10 +201,14 @@ datatable videos.json
     <button class="kb-close" id="kb-close" type="button" aria-label="Close video">✕</button>
    </div>
   </div>
-  <video class="kb-player" id="kb-player" controls playsinline preload="none"></video>
+  <div class="kb-stage">
+   <video class="kb-player" id="kb-player" controls playsinline preload="none"></video>
+   <button class="kb-arrow kb-arrow-prev" id="kb-prev-overlay" type="button" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+   <button class="kb-arrow kb-arrow-next" id="kb-next-overlay" type="button" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
   <div class="kb-dialog-foot">
    <a class="kb-download" id="kb-download" download>Download MP4</a>
-   <span class="kb-hint">Use ← → to change videos</span>
+   <span class="kb-hint">Use the arrows or ← → to change videos</span>
   </div>
  </div>
 </dialog>
