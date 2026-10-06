@@ -14,6 +14,8 @@
 //       published 2026-10-01
 //       publishedLabel Oct 1, 2026
 //       duration 0:30
+//     vertical videos also get:
+//       orientation portrait
 //  3. run `scroll build`
 //
 // `scroll build` also renders poster thumbnails via buildThumbs.scroll:
@@ -50,6 +52,10 @@ publishedLabelParser
 durationParser
  extends abstractStringMeasureParser
  description How long the video runs, like 0:30.
+
+orientationParser
+ extends abstractStringMeasureParser
+ description Optional. Set to portrait for vertical videos; omit for landscape (16:9).
 
 // Data (oldest first; the page sorts newest first at runtime)
 
@@ -116,6 +122,15 @@ poster posters/hatersWillSayHI.jpg
 published 2026-09-14T12:42
 publishedLabel Sep 14, 2026
 duration 0:04
+
+id Airplants
+title Airplants
+src Airplants.mp4
+poster posters/Airplants.jpg
+orientation portrait
+published 2026-09-16
+publishedLabel Sep 16, 2026
+duration 0:36
 
 id 451
 title 451
