@@ -179,5 +179,14 @@
     "published": "2026-10-08",
     "publishedLabel": "Oct 8, 2026",
     "duration": "10:11"
+  },
+  {
+    "id": "lumber",
+    "title": "Lumber",
+    "src": "lumber.mp4",
+    "poster": "posters/lumber.jpg",
+    "published": "2026-10-09",
+    "publishedLabel": "Oct 9, 2026",
+    "duration": "1:03"
   }
 ]
