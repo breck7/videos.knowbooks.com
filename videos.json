@@ -170,5 +170,14 @@
     "published": "2026-10-06T19:23",
     "publishedLabel": "Oct 6, 2026",
     "duration": "0:23"
+  },
+  {
+    "id": "fireplace",
+    "title": "Hawaii Fireplace",
+    "src": "fireplace-small.mp4",
+    "poster": "posters/fireplace-small.jpg",
+    "published": "2026-10-08",
+    "publishedLabel": "Oct 8, 2026",
+    "duration": "10:11"
   }
 ]
