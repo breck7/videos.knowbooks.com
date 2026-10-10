@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Knowbooks Videos">
+ <defs>
+  <radialGradient id="tile" cx="30%" cy="18%" r="92%">
+   <stop offset="0" stop-color="#182234"/>
+   <stop offset="1" stop-color="#0a0d12"/>
+  </radialGradient>
+ </defs>
+ <rect x="0" y="0" width="64" height="64" rx="15" fill="url(#tile)"/>
+ <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="14.25" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1.5"/>
+ <circle cx="32" cy="32" r="19.5" fill="none" stroke="#d9bc78" stroke-width="4.6"/>
+ <path d="M26.5 23.4 L42.2 32 L26.5 40.6 Z" fill="#f4e5bf"/>
+</svg>

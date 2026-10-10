@@ -1,0 +1,110 @@
+// buildImages.scroll — the OG image and favicons, built by `scroll build`.
+//
+// The two vector sources (og.svg and favicon.svg) are the source of truth.
+// This step rasterizes them with headless Chrome into the files the site
+// actually serves: og.png, favicon.ico, and apple-touch-icon.png.
+//
+// Only sources newer than their outputs are (re)rendered, so a rebuild is
+// instant until you edit an .svg. If Chrome is not found the step warns and
+// leaves the existing images in place.
+//
+// This file only has a build side effect, so it writes no output file.
+
+runNodejs
+ const { execFileSync } = require("child_process")
+ const { existsSync, statSync, writeFileSync, readFileSync } = require("fs")
+ const { join, resolve } = require("path")
+ const { tmpdir } = require("os")
+ const chromePaths = [
+   process.env.CHROME,
+   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+   "/Applications/Chromium.app/Contents/MacOS/Chromium",
+   "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+   "/usr/bin/google-chrome",
+   "/usr/bin/chromium",
+   "/usr/bin/chromium-browser",
+ ].filter(Boolean)
+ const chrome = chromePaths.find((p) => existsSync(p))
+ if (!chrome) {
+   console.log("⚠️  Chrome not found, skipping og.png / favicon.ico / apple-touch-icon.png")
+   module.exports = ""
+   return
+ }
+ const tmpHtml = join(tmpdir(), "scroll-build-image.html")
+ const isFresh = (src, out) => existsSync(out) && statSync(out).mtimeMs >= statSync(src).mtimeMs
+ const chromeFlags = (out, width, height) => [
+   "--headless=new",
+   "--disable-gpu",
+   "--hide-scrollbars",
+   "--force-device-scale-factor=1",
+   "--allow-file-access-from-files",
+   "--default-background-color=00000000",
+   "--virtual-time-budget=2000",
+   `--window-size=${width},${height}`,
+   `--screenshot=${out}`,
+ ]
+ // Screenshot an <img> sized exactly to width x height, so the SVG scales to it.
+ // Used for the favicon (no external resources inside it).
+ const render = (svg, out, width, height) => {
+   writeFileSync(
+     tmpHtml,
+     `<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;padding:0;overflow:hidden;background:transparent}img{display:block;width:${width}px;height:${height}px}</style></head><body><img width="${width}" height="${height}" src="file://${resolve(svg)}"></body></html>`
+   )
+   execFileSync(chrome, [...chromeFlags(out, width, height), "file://" + tmpHtml], { stdio: "ignore" })
+ }
+ // Screenshot the SVG as a top-level document. Needed for og.svg because a
+ // browser will not load an SVG's external images when it is embedded via <img>.
+ const renderDocument = (svg, out, width, height) =>
+   execFileSync(chrome, [...chromeFlags(out, width, height), "file://" + resolve(svg)], { stdio: "ignore" })
+ // Wrap PNGs in a plain .ico container (PNG-compressed icons, sizes 16 and 32).
+ const buildIco = (out, images) => {
+   const header = Buffer.alloc(6)
+   header.writeUInt16LE(0, 0)
+   header.writeUInt16LE(1, 2)
+   header.writeUInt16LE(images.length, 4)
+   let offset = 6 + 16 * images.length
+   const entries = images.map(({ size, data }) => {
+     const entry = Buffer.alloc(16)
+     entry.writeUInt8(size % 256, 0)
+     entry.writeUInt8(size % 256, 1)
+     entry.writeUInt8(0, 2)
+     entry.writeUInt8(0, 3)
+     entry.writeUInt16LE(1, 4)
+     entry.writeUInt16LE(32, 6)
+     entry.writeUInt32LE(data.length, 8)
+     entry.writeUInt32LE(offset, 12)
+     offset += data.length
+     return entry
+   })
+   writeFileSync(out, Buffer.concat([header, ...entries, ...images.map((i) => i.data)]))
+ }
+ let built = 0
+ const renderIfStale = (src, out, w, h) => {
+   if (isFresh(src, out)) return
+   render(src, out, w, h)
+   console.log(`  built ${out} (${w}x${h})`)
+   built++
+ }
+ const renderDocumentIfStale = (src, out, w, h) => {
+   if (isFresh(src, out)) return
+   renderDocument(src, out, w, h)
+   console.log(`  built ${out} (${w}x${h})`)
+   built++
+ }
+ // Apple touch icon (iOS home screen)
+ renderIfStale("favicon.svg", "apple-touch-icon.png", 180, 180)
+ // favicon.ico from 16 and 32 px renders
+ if (!isFresh("favicon.svg", "favicon.ico")) {
+   const icons = [16, 32].map((size) => {
+     const png = join(tmpdir(), `scroll-favicon-${size}.png`)
+     render("favicon.svg", png, size, size)
+     return { size, data: readFileSync(png) }
+   })
+   buildIco("favicon.ico", icons)
+   console.log("  built favicon.ico (16, 32)")
+   built++
+ }
+ // Open Graph / social media image
+ renderDocumentIfStale("og.svg", "og.png", 1200, 630)
+ console.log(`🖼️  ${built} image(s) generated, others up to date.`)
+ module.exports = ""

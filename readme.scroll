@@ -18,6 +18,8 @@ description Knowbooks.com videos. For entertainment purposes only.
 keywords knowbooks, videos, breck, books, scroll
 baseUrl https://videos.knowbooks.com/
 editBaseUrl https://github.com/breck7/videos.knowbooks.com/blob/main/
+openGraphImage og.png
+favicon favicon.svg
 
 metaTags
 
