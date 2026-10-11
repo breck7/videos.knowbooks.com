@@ -235,3 +235,12 @@ poster posters/glass.jpg
 published 2026-10-10
 publishedLabel Oct 10, 2026
 duration 0:31
+
+id knowbooksLaunchEvent
+title Knowbooks Launch Event
+src knowbooksLaunchEvent.mp4
+poster posters/knowbooksLaunchEvent.jpg
+published 2026-10-11
+publishedLabel Oct 11, 2026
+duration 0:19
+orientation portrait
