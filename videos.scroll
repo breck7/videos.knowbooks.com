@@ -244,3 +244,11 @@ published 2026-10-11
 publishedLabel Oct 11, 2026
 duration 0:19
 orientation portrait
+
+id why
+title Why
+src why.mp4
+poster posters/why.jpg
+published 2026-10-14
+publishedLabel Oct 14, 2026
+duration 2:49
