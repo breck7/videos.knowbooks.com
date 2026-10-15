@@ -260,3 +260,12 @@ poster posters/koa.jpg
 published 2026-10-14
 publishedLabel Oct 14, 2026
 duration 0:28
+
+id staycalmcopyon
+title Stay Calm Copy On
+src stayCalmCopyOn.mp4
+poster posters/stayCalmCopyOn.jpg
+published 2026-10-15
+publishedLabel Oct 15, 2026
+duration 2:51
+
