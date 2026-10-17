@@ -252,5 +252,14 @@
     "published": "2026-10-17",
     "publishedLabel": "Oct 17, 2026",
     "duration": "0:48"
+  },
+  {
+    "id": "3dPrinters",
+    "title": "3D Printers",
+    "src": "3dPrinters.mp4",
+    "poster": "posters/3dPrinters.jpg",
+    "published": "2026-10-17",
+    "publishedLabel": "Oct 17, 2026",
+    "duration": "0:52"
   }
 ]
