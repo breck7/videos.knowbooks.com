@@ -243,5 +243,14 @@
     "published": "2026-10-16",
     "publishedLabel": "Oct 16, 2026",
     "duration": "7:14"
+  },
+  {
+    "id": "launchationBrunch",
+    "title": "Launchation Brunch",
+    "src": "launchationBrunch.mp4",
+    "poster": "posters/launchationBrunch.jpg",
+    "published": "2026-10-17",
+    "publishedLabel": "Oct 17, 2026",
+    "duration": "0:48"
   }
 ]
