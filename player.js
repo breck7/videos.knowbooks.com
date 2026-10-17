@@ -48,16 +48,43 @@
   let order = cards.slice()
   let currentIndex = 0
 
-  function loadCard(card) {
+  // Deeplinks: #id or #id&t=83 (t also accepts 1:23 or 1m23s).
+  function parseTime(s) {
+    if (!s) return 0
+    if (s.includes(":")) return s.split(":").reduce((acc, n) => acc * 60 + Number(n), 0)
+    const m = s.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+(?:\.\d+)?)s?)?$/)
+    return m ? (Number(m[1] || 0) * 3600 + Number(m[2] || 0) * 60 + Number(m[3] || 0)) : 0
+  }
+
+  function setHash(hash) {
+    history.replaceState(null, "", hash || location.pathname + location.search)
+  }
+
+  function route() {
+    const [id, ...params] = decodeURIComponent(location.hash.slice(1)).split("&")
+    const card = cards.find((c) => c.dataset.id === id)
+    if (!card) return
+    const tParam = params.find((p) => p.startsWith("t="))
+    card.scrollIntoView({ block: "center" })
+    openPlayer(card, parseTime(tParam && tParam.slice(2)))
+  }
+
+  function loadCard(card, startAt) {
     if (!card) return
     currentIndex = order.indexOf(card)
     player.poster = card.dataset.poster || ""
-    player.src = card.dataset.src
+    player.src = card.dataset.src + (startAt > 0 ? "#t=" + startAt : "")
     dialogTitle.textContent = card.dataset.title || ""
+    setHash("#" + card.dataset.id + (startAt > 0 ? "&t=" + startAt : ""))
     download.href = card.dataset.src
     download.setAttribute("download", card.dataset.src)
     const attempt = player.play()
-    if (attempt && typeof attempt.catch === "function") attempt.catch(() => {})
+    // Autoplay with sound can be blocked (e.g. on a fresh deeplink); retry muted.
+    if (attempt && typeof attempt.catch === "function")
+      attempt.catch(() => {
+        player.muted = true
+        player.play().catch(() => {})
+      })
   }
 
   // Move by delta (+1 next, -1 previous), wrapping around the ends.
@@ -67,8 +94,8 @@
     loadCard(order[currentIndex])
   }
 
-  function openPlayer(card) {
-    loadCard(card)
+  function openPlayer(card, startAt) {
+    loadCard(card, startAt)
     if (!dialog.open) {
       if (typeof dialog.showModal === "function") {
         dialog.showModal()
@@ -83,6 +110,17 @@
     player.removeAttribute("src")
     player.load()
   }
+
+  // Clicking the player title copies a link to the current moment.
+  dialogTitle.addEventListener("click", (event) => {
+    event.preventDefault()
+    const card = order[currentIndex]
+    const t = Math.floor(player.currentTime || 0)
+    setHash("#" + card.dataset.id + (t > 0 ? "&t=" + t : ""))
+    if (navigator.clipboard) navigator.clipboard.writeText(location.href).catch(() => {})
+    dialogTitle.textContent = "Link copied"
+    setTimeout(() => (dialogTitle.textContent = card.dataset.title || ""), 1200)
+  })
 
   function closePlayer() {
     stopPlayback()
@@ -126,7 +164,10 @@
   })
 
   // Fires for Esc too, so make sure the network fetch is dropped either way.
-  dialog.addEventListener("close", stopPlayback)
+  dialog.addEventListener("close", () => {
+    stopPlayback()
+    setHash("")
+  })
 
   if (sortButton) {
     sortButton.addEventListener("click", () => {
@@ -138,4 +179,6 @@
 
   renderSortLabel()
   sortCards()
+  window.addEventListener("hashchange", route)
+  route()
 })()
