@@ -261,5 +261,14 @@
     "published": "2026-10-17",
     "publishedLabel": "Oct 17, 2026",
     "duration": "0:52"
+  },
+  {
+    "id": "flyingCarsAtGlowGolfHawaiiKapolei",
+    "title": "Flying Cars at Glow Golf Hawaii Kapolei",
+    "src": "flyingCarsAtGlowGolfHawaiiKapolei.mp4",
+    "poster": "posters/flyingCarsAtGlowGolfHawaiiKapolei.jpg",
+    "published": "2026-10-18",
+    "publishedLabel": "Oct 18, 2026",
+    "duration": "1:04"
   }
 ]
