@@ -219,8 +219,14 @@ datatable videos.json
 
 <noscript><p class="kb-noscript">Enable JavaScript to play the videos. You can still open any file directly, for example <a href="kb1984.mp4">kb1984.mp4</a>.</p></noscript>
 
-<footer class="kb-footer">
- <a href="https://knowbooks.com">knowbooks.com</a>
-</footer>
+footer knowbooks.com
+ class kb-footer
+ href https://knowbooks.com
+
+center
+code
+ git clone https:///github.com/breck7/videos.knowbooks.com
+br 2
+
 
 player.js
