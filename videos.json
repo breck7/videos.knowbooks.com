@@ -279,5 +279,14 @@
     "published": "2026-10-21",
     "publishedLabel": "Oct 21, 2026",
     "duration": "0:22"
+  },
+  {
+    "id": "thereWillBeGolf",
+    "title": "There Will Be Golf",
+    "src": "thereWillBeGolf.mp4",
+    "poster": "posters/thereWillBeGolf.jpg",
+    "published": "2026-10-21",
+    "publishedLabel": "Oct 21, 2026",
+    "duration": "3:42"
   }
 ]
