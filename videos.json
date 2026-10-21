@@ -270,5 +270,14 @@
     "published": "2026-10-19",
     "publishedLabel": "Oct 19, 2026",
     "duration": "0:34"
+  },
+  {
+    "id": "makeMeAKnowbook",
+    "title": "Make Me a Knowbook",
+    "src": "makeMeAKnowbook.mp4",
+    "poster": "posters/makeMeAKnowbook.jpg",
+    "published": "2026-10-21",
+    "publishedLabel": "Oct 21, 2026",
+    "duration": "0:22"
   }
 ]
