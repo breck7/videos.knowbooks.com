@@ -288,5 +288,23 @@
     "published": "2026-10-21",
     "publishedLabel": "Oct 21, 2026",
     "duration": "3:42"
+  },
+  {
+    "id": "launchation12days",
+    "title": "Launchation 12 Days",
+    "src": "launchation12days.mp4",
+    "poster": "posters/launchation12days.jpg",
+    "published": "2026-10-24",
+    "publishedLabel": "Oct 24, 2026",
+    "duration": "1:37"
+  },
+  {
+    "id": "tenDays",
+    "title": "Ten Days",
+    "src": "tenDays.mp4",
+    "poster": "posters/tenDays.jpg",
+    "published": "2026-10-26",
+    "publishedLabel": "Oct 26, 2026",
+    "duration": "1:59"
   }
 ]
