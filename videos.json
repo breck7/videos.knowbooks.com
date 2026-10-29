@@ -306,5 +306,14 @@
     "published": "2026-10-26",
     "publishedLabel": "Oct 26, 2026",
     "duration": "1:59"
+  },
+  {
+    "id": "augmentedReality",
+    "title": "Augmented Reality",
+    "src": "augmentedReality.mp4",
+    "poster": "posters/augmentedReality.jpg",
+    "published": "2026-10-28",
+    "publishedLabel": "Oct 28, 2026",
+    "duration": "1:32"
   }
 ]
