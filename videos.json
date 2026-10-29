@@ -315,5 +315,15 @@
     "published": "2026-10-28",
     "publishedLabel": "Oct 28, 2026",
     "duration": "1:32"
+  },
+  {
+    "id": "chips",
+    "title": "Chips",
+    "src": "chips.mp4",
+    "poster": "posters/chips.jpg",
+    "published": "2026-10-28",
+    "publishedLabel": "Oct 28, 2026",
+    "duration": "1:16",
+    "orientation": "portrait"
   }
 ]
