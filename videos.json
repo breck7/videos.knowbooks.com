@@ -325,5 +325,14 @@
     "publishedLabel": "Oct 28, 2026",
     "duration": "1:16",
     "orientation": "portrait"
+  },
+  {
+    "id": "booksChangeIn3Days",
+    "title": "Books Change in 3 Days",
+    "src": "booksChangeIn3Days.mp4",
+    "poster": "posters/booksChangeIn3Days.jpg",
+    "published": "2026-11-01",
+    "publishedLabel": "Nov 1, 2026",
+    "duration": "1:56"
   }
 ]
