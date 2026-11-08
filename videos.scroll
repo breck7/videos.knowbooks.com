@@ -366,6 +366,15 @@ published 2026-11-04
 publishedLabel Nov 4, 2026
 duration 0:48
 
+id launchationVibes
+title Launchation Vibes
+src launchationVibes.mp4
+poster posters/launchationVibes.jpg
+published 2026-11-05
+publishedLabel Nov 5, 2026
+duration 1:00
+orientation portrait
+
 id jackBlackJumanji
 title Jack Black Jumanji
 src jackBlackJumanji.mp4
@@ -373,3 +382,4 @@ poster posters/jackBlackJumanji.jpg
 published 2026-11-06
 publishedLabel Nov 6, 2026
 duration 0:12
+orientation portrait
