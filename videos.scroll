@@ -365,3 +365,11 @@ poster posters/firstLaunchationCustomer.jpg
 published 2026-11-04
 publishedLabel Nov 4, 2026
 duration 0:48
+
+id jackBlackJumanji
+title Jack Black Jumanji
+src jackBlackJumanji.mp4
+poster posters/jackBlackJumanji.jpg
+published 2026-11-06
+publishedLabel Nov 6, 2026
+duration 0:12
