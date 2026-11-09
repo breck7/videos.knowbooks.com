@@ -363,5 +363,14 @@
     "publishedLabel": "Nov 6, 2026",
     "duration": "0:12",
     "orientation": "portrait"
+  },
+  {
+    "id": "thereWasGolf",
+    "title": "There Was Golf",
+    "src": "thereWasGolf.mp4",
+    "poster": "posters/thereWasGolf.jpg",
+    "published": "2026-11-09",
+    "publishedLabel": "Nov 9, 2026",
+    "duration": "2:28"
   }
 ]
