@@ -399,5 +399,16 @@
     "published": "2026-11-16",
     "publishedLabel": "Nov 16, 2026",
     "duration": "2:32"
+  },
+  {
+    "id": "kbooksBookkeepingSystem",
+    "title": "Kbooks Bookkeeping System",
+    "src": "kbooksBookkeepingSystem.mp4",
+    "poster": "posters/kbooksBookkeepingSystem.jpg",
+    "published": "2026-11-17",
+    "publishedLabel": "Nov 17, 2026",
+    "duration": "4:12",
+    "orientation": "portrait",
+    "posterTime": "48"
   }
 ]
