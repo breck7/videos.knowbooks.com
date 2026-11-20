@@ -410,5 +410,15 @@
     "duration": "4:12",
     "orientation": "portrait",
     "posterTime": "48"
+  },
+  {
+    "id": "aiVsHi",
+    "title": "AI vs HI",
+    "src": "aiVsHi.mp4",
+    "poster": "posters/aiVsHi.jpg",
+    "published": "2026-11-20",
+    "publishedLabel": "Nov 20, 2026",
+    "duration": "0:52",
+    "orientation": "portrait"
   }
 ]
